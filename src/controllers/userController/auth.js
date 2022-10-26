@@ -10,6 +10,7 @@ const Schema = Joi.object({
   email: Joi.string().email().required(),
   password: Joi.string().required(),
   name: Joi.string().required(),
+  phone: Joi.string().allow(""),
   lastname: Joi.string().required(),
 });
 
@@ -27,6 +28,7 @@ export const signUp = async (req, res) => {
       name: value.name,
       lastname: value.lastname,
       email: value.email,
+      phone: value.phone,
       password: await User.encryptPassword(value.password),
     });
 

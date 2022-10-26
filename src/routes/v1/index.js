@@ -14,6 +14,6 @@ app.get("/", (req, res) => {
 });
 
 app.use("/auth", auth);
-app.use("/users", /* verifyToken, */ users);
+app.use("/users", verifyToken, users);
 
 export default app;

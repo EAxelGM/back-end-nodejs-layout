@@ -3,7 +3,7 @@ import morgan from "morgan";
 import cors from "cors";
 import routesV1 from "./routes/v1";
 import { response } from "./helpers/responses";
-import { createAdmin } from "./seeders/users";
+import { createAdmin, usersFake } from "./seeders/users";
 
 const app = express();
 
@@ -16,6 +16,9 @@ app.use(express.json());
 
 //! Seeders
 createAdmin();
+
+//! Seeders fake. comentar estos una vez se apliquen en producción
+usersFake({ total: 100 });
 
 //Routes
 app.get("/", (req, res) => {

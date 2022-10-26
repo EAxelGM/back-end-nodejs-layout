@@ -1,13 +1,14 @@
 import mongoose from "mongoose";
+import config from "../config";
 
-const MONGO_ATLAS = process.env.MONGO_ATLAS == "true" ? true : false;
-const MONGO_HOST = process.env.MONGO_HOST;
-const MONGO_PORT = process.env.MONGO_PORT;
-const MONGO_USER = process.env.MONGO_USER;
-const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
-const MONGO_DB_NAME = process.env.MONGO_DB_NAME;
+const MONGO_ATLAS = config.MONGO_ATLAS == "true" ? true : false;
+const MONGO_HOST = config.MONGO_HOST;
+const MONGO_PORT = config.MONGO_PORT;
+const MONGO_USER = config.MONGO_USER;
+const MONGO_PASSWORD = config.MONGO_PASSWORD;
+const MONGO_DB_NAME = config.MONGO_DB_NAME;
 
-var URL = "";
+let URL = "";
 
 if (!MONGO_ATLAS) {
   if (MONGO_PASSWORD == "" || MONGO_USER == "") {
@@ -25,9 +26,8 @@ mongoose
     useUnifiedTopology: true,
     //useCreateIndex:true
   })
-  .then((res) =>
-    console.log(`Conexion con mongo al host: ${MONGO_HOST} & Base de Datos ${MONGO_DB_NAME}`)
-  )
+  .then((res) => console.log(`Conexion con mongo al host: ${MONGO_HOST} & Base de Datos: ${MONGO_DB_NAME}`))
   .catch((err) => {
+    console.log(`Hubo un error en la conexion con mongo:`);
     console.log({ err });
   });
