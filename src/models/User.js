@@ -9,6 +9,7 @@ const Schema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     phone: { type: String, default: "" },
     password: { type: String, required: true },
+    role: { type: mongoose.Schema.Types.ObjectId, ref: "Role" },
   },
   {
     versionKey: false,

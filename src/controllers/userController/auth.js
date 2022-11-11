@@ -19,7 +19,7 @@ const SchemaLogin = Joi.object({
   password: Joi.string().required(),
 });
 
-const populateConfig = [];
+const populateConfig = [{ path: "role", populate: [{ path: "permissions", select: ["name"] }] }];
 
 export const signUp = async (req, res) => {
   try {

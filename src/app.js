@@ -4,6 +4,8 @@ import cors from "cors";
 import routesV1 from "./routes/v1";
 import { response } from "./helpers/responses";
 import { createAdmin, usersFake } from "./seeders/users";
+import { createPermissions } from "./seeders/permissions";
+import { createRoleSuperAdmin } from "./seeders/roles";
 
 const app = express();
 
@@ -15,7 +17,9 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 //! Seeders
-createAdmin();
+await createPermissions();
+await createRoleSuperAdmin();
+await createAdmin();
 
 //! Seeders fake. comentar estos una vez se apliquen en producción
 usersFake({ total: 100 });
